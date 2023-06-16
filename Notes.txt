@@ -1,3 +1,5 @@
+Codebase found at: https://github.com/tylerchang73/ece188_final
+
 For conversion from KITTI to VOC, in the vod-converter-master/voc-converter/converter.py, modify the "raw_validate()" function return to
     "return raw_validate(data, schema)", rather than "return raw_validate(data, schema, types={"array": (list, tuple)})"
     Old jsonschema version required types argument, current does not.

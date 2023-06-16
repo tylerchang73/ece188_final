@@ -4,7 +4,7 @@ For conversion from KITTI to VOC, in the vod-converter-master/voc-converter/conv
     
 Kitti images in png, convert to jpg with ImageMagick: magick mogrify -format jpg *.png 
 
-Clone to mmdetection repo from https://github.com/open-mmlab/mmdetection and place in ece188/ folder
+Clone mmdetection repo from https://github.com/open-mmlab/mmdetection and place in ece188/ folder
 
 From ece188/mmdetection_changes, place kitti folder into mmdetection/configs, place kitti_dataset.py into mmdetection/configs/_base_/datasets
 

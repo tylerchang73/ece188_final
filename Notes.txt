@@ -1,0 +1,32 @@
+For conversion from KITTI to VOC, in the vod-converter-master/voc-converter/converter.py, modify the "raw_validate()" function return to
+    "return raw_validate(data, schema)", rather than "return raw_validate(data, schema, types={"array": (list, tuple)})"
+    Old jsonschema version required types argument, current does not.
+    
+Kitti images in png, convert to jpg with ImageMagick: magick mogrify -format jpg *.png 
+
+Clone to mmdetection repo from https://github.com/open-mmlab/mmdetection and place in ece188/ folder
+
+From ece188/mmdetection_changes, place kitti folder into mmdetection/configs, place kitti_dataset.py into mmdetection/configs/_base_/datasets
+
+Customized config files found in mmdetection/configs/kitti
+
+Added KITTI datset to mmdetection under mmdetection/configs/_base_/datasets/kitti_dataset.py
+
+For training the different models:
+    python tools/train.py configs/kitti/kitti_faster_rcnn.py --work-dir ../kitti_train/faster_rcnn
+    
+    python tools/train.py configs/kitti/kitti_ssd.py --work-dir ../kitti_train/ssd
+    
+    python tools/train.py configs/kitti/kitti_retinanet.py --work-dir ../kitti_train/retinanet
+    
+For testing the models:
+    python tools/test.py configs/kitti/kitti_faster_rcnn.py ../kitti_train/faster_rcnn/epoch_6.pth --show-dir ../kitti_train/trained
+    python tools/test.py configs/kitti/kitti_faster_rcnn.py ../kitti_train/pretrained/faster_rcnn.pth --show-dir ../kitti_train/pretrained
+    
+    python tools/test.py configs/kitti/kitti_ssd.py ../kitti_train/ssd/epoch_13.pth --show-dir ../kitti_train/trained
+    python tools/test.py configs/kitti/kitti_ssd.py ../kitti_train/pretrained/ssd.pth --show-dir ../kitti_train/pretrained
+    
+    python tools/test.py configs/kitti/kitti_retinanet.py ../kitti_train/retinanet/epoch_10.pth --show-dir ../kitti_train/trained
+    python tools/test.py configs/kitti/kitti_retinanet.py ../kitti_train/pretrained/retinanet.pth --show-dir ../kitti_train/pretrained
+    
+To avoid uploading overly large imagesets to github, this codebase has all image data removed
